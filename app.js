@@ -1,32 +1,30 @@
 const express = require('express');
-const app = express();
-const dbConnection = require('./config/db')
-const dotenv = require('dotenv')
-require('dotenv').config()
-const admin = require('firebase-admin')
-const {serviceAccount} = require('./config/firebase.js')
-const taskRoutes = require('./routes/TaskRoutes')
+const dbConnection = require('./config/db');
+const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
+
+dotenv.config();
+
+const taskRoutes = require('./routes/TaskRoutes');
+const authRoutes = require('./routes/authRoutes');
 const PORT = process.env.PORT || 3000;
 
+dbConnection();
 
-try {
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-  });
-} catch (error) {
-  console.error('Error initialization Firebase Admin:', error.message);
-}
-
-dbConnection()
+const app = express();
 
 app.use(express.json());
-app.use('/', taskRoutes)
+app.use(cookieParser());
+
+
+app.use('/', taskRoutes);
+app.use('/', authRoutes);
 
 app.get('/', (req, res) => {
-  res.send(' funcionando!');
+  res.send('¡Funcionando!');
 });
-
 
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
+
