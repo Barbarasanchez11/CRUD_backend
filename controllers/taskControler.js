@@ -31,6 +31,18 @@ const apiTask = {
         } catch (error) {
             res.status(500).send(error)
         }
+    },
+    async updateTask(req,res){
+        const {id} =req.params
+        const body = req.body
+
+        try {
+            const tasks = await Task.findByIdAndUpdate(id, {...body})
+            res.status(200).json(tasks)
+            
+        } catch (error) {
+            res.status(500).send(error)
+        }
     }
 }
 
