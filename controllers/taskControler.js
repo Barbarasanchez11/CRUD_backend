@@ -43,6 +43,16 @@ const apiTask = {
         } catch (error) {
             res.status(500).send(error)
         }
+    },
+    async deleteTask(req,res){
+        const {id} = req.params
+        try {
+            const tasks = await Task.findByIdAndDelete(id)
+            res.send({message: 'deleted task', tasks})
+        } catch (error) {
+            res.status(500).send(error)
+            
+        }
     }
 }
 
