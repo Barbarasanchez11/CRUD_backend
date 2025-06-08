@@ -21,6 +21,16 @@ const apiTask = {
         } catch (error) {
             res.status(500).send(error)
         }
+    },
+    async getTasksById(req,res){
+        const {id} = req.params
+        try {
+            const tasks = await Task.findById(id)
+            res.send(tasks)
+
+        } catch (error) {
+            res.status(500).send(error)
+        }
     }
 }
 
