@@ -11,6 +11,16 @@ const apiTask = {
         } catch (error) {
             res.status(500).send(error)
         }
+    },
+
+    async getTasks(req,res){
+        try {
+            const tasks = await Task.find()
+            return res.json(tasks)
+            
+        } catch (error) {
+            res.status(500).send(error)
+        }
     }
 }
 
