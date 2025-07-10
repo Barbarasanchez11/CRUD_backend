@@ -1,5 +1,5 @@
-function baseHtml(){
-    return `
+function baseHtml() {
+  return `
     <!DOCTYPE html>
     <html lang="es">
     <head>
@@ -17,4 +17,4 @@ function baseHtml(){
     `;
 }
 
-module.exports = {baseHtml}
+module.exports = { baseHtml };
